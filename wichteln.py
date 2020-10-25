@@ -5,7 +5,7 @@ def liste_rotieren(list):
     return list[1:] + list[:1]
 
 
-def geschenke_verteilen(erste_wünsche, zweite_wünsche, dritte_wünsche, class_members):
+def geschenke_verteilen(first_wishes, second_wishes, third_wishes, class_members):
     stats = {
         "first_wishes": 0,
         "second_wishes": 0,
@@ -15,10 +15,9 @@ def geschenke_verteilen(erste_wünsche, zweite_wünsche, dritte_wünsche, class_
     old_stats = stats.copy()
     pupils_without_gifts = []
     pupils = []
-    gifts = []
-    for i in range(class_members):
-        pupils.append(i)
-    for j in range(class_members):
+    for pupil_id in range(class_members):
+        pupils.append(pupil_id)
+    for pupil_id in range(class_members):
         stats = {
             "first_wishes": 0,
             "second_wishes": 0,
@@ -27,14 +26,14 @@ def geschenke_verteilen(erste_wünsche, zweite_wünsche, dritte_wünsche, class_
         }
         solution_dic = {}
         for pupil in pupils:
-            if erste_wünsche[pupil] not in solution_dic.values():
-                solution_dic[pupil] = erste_wünsche[pupil]
+            if first_wishes[pupil] not in solution_dic.values():
+                solution_dic[pupil] = first_wishes[pupil]
                 stats["first_wishes"] = stats["first_wishes"] + 1
-            elif zweite_wünsche[pupil] not in solution_dic.values():
-                solution_dic[pupil] = zweite_wünsche[pupil]
+            elif second_wishes[pupil] not in solution_dic.values():
+                solution_dic[pupil] = second_wishes[pupil]
                 stats["second_wishes"] = stats["second_wishes"] + 1
-            elif dritte_wünsche[pupil] not in solution_dic.values():
-                solution_dic[pupil] = dritte_wünsche[pupil]
+            elif third_wishes[pupil] not in solution_dic.values():
+                solution_dic[pupil] = third_wishes[pupil]
                 stats["third_wishes"] = stats["third_wishes"] + 1
             else:
                 pupils_without_gifts.append(pupil)
@@ -61,9 +60,9 @@ startTime = datetime.now()
 file = open(file_path, 'r', encoding='utf8')
 lines = file.readlines()
 class_members = int(lines[0])
-erste_wünsche = {}
-zweite_wünsche = {}
-dritte_wünsche = {}
+first_wishes = {}
+second_wishes = {}
+third_wishes = {}
 print("Geschenke werden zugeordnet ... \n\n")
 for pupil in range(class_members):  # Extract wishes from text file into lists
     wishes = lines[pupil + 1].split(" ")
@@ -78,10 +77,10 @@ for pupil in range(class_members):  # Extract wishes from text file into lists
             wishes.remove(wishes[i])
     for i in range(len(wishes)):
         wishes[i] = wishes[i].replace("\n", "")
-    erste_wünsche[pupil] = wishes[0]
-    zweite_wünsche[pupil] = wishes[1]
-    dritte_wünsche[pupil] = wishes[2]
-solution, solution_dic = geschenke_verteilen(erste_wünsche, zweite_wünsche, dritte_wünsche, class_members)
+    first_wishes[pupil] = wishes[0]
+    second_wishes[pupil] = wishes[1]
+    third_wishes[pupil] = wishes[2]
+solution, solution_dic = geschenke_verteilen(first_wishes, second_wishes, third_wishes, class_members)
 print("Erste Wünsche erfüllt: " + str(solution["first_wishes"]))
 print("Zweite Wünsche erfüllt: " + str(solution["second_wishes"]))
 print("Dritte Wünsche erfüllt: " + str(solution["third_wishes"]))
