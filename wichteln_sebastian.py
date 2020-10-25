@@ -69,7 +69,7 @@ def überschreiben(wunsch1, wunsch2, wunsch3, zufall, zuordnung, item):
 # eingabe = int(input("Welches Szenario soll simuliert werden? 1, 2, 3, 4, 5, 6 oder 7? "))
 eingabe = 4
 if 1 <= eingabe <= 7:
-    wichteln = "wichteln" + str(eingabe) + ".txt"
+    wichteln = "wichteln/wichteln" + str(eingabe) + ".txt"
 datei = open(wichteln, 'r', encoding='utf8')
 lines = datei.readlines()
 personen = int(lines[0])

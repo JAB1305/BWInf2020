@@ -24,16 +24,16 @@ def geschenke_verteilen(first_wishes, second_wishes, third_wishes, class_members
             "third_wishes": 0,
             "no_wish": 0
         }
-        solution_dic = {}
+        relation = {}
         for pupil in pupils:
-            if first_wishes[pupil] not in solution_dic.values():
-                solution_dic[pupil] = first_wishes[pupil]
+            if first_wishes[pupil] not in relation.values():
+                relation[pupil] = first_wishes[pupil]
                 stats["first_wishes"] = stats["first_wishes"] + 1
-            elif second_wishes[pupil] not in solution_dic.values():
-                solution_dic[pupil] = second_wishes[pupil]
+            elif second_wishes[pupil] not in relation.values():
+                relation[pupil] = second_wishes[pupil]
                 stats["second_wishes"] = stats["second_wishes"] + 1
-            elif third_wishes[pupil] not in solution_dic.values():
-                solution_dic[pupil] = third_wishes[pupil]
+            elif third_wishes[pupil] not in relation.values():
+                relation[pupil] = third_wishes[pupil]
                 stats["third_wishes"] = stats["third_wishes"] + 1
             else:
                 pupils_without_gifts.append(pupil)
@@ -41,15 +41,18 @@ def geschenke_verteilen(first_wishes, second_wishes, third_wishes, class_members
         if is_better(old_stats, stats):
             old_stats = stats.copy()
         pupils = liste_rotieren(pupils)
-    return old_stats, solution_dic
+    return old_stats, relation
 
 
 def is_better(stats_old, stats_new):  # Vergleicht die Statistik zweier Druchläufe
     if stats_old["first_wishes"] < stats_new["first_wishes"]:
         return True
-    elif stats_old["first_wishes"] == stats_new["first_wishes"] and stats_old["second_wishes"] < stats_new["second_wishes"]:
+    elif stats_old["first_wishes"] == stats_new["first_wishes"] \
+            and stats_old["second_wishes"] < stats_new["second_wishes"]:
         return True
-    elif stats_old["first_wishes"] == stats_new["first_wishes"] and stats_old["second_wishes"] == stats_new["second_wishes"] and stats_old["third_wishes"] < stats_new["third_wishes"]:
+    elif stats_old["first_wishes"] == stats_new["first_wishes"] \
+            and stats_old["second_wishes"] == stats_new["second_wishes"] \
+            and stats_old["third_wishes"] < stats_new["third_wishes"]:
         return True
     else:
         return False
