@@ -1,4 +1,5 @@
-import random
+from datetime import datetime
+startTime = datetime.now()
 
 
 def liste_rotieren(list):
@@ -44,12 +45,12 @@ def geschenke_verteilen(erste_wünsche, zweite_wünsche, dritte_wünsche, class_
     return old_stats
 
 
-def is_better(stats_old, stats_new):
+def is_better(stats_old, stats_new):  # Vergleicht die Statistik zweier Druchläufe
     if stats_old["first_wishes"] < stats_new["first_wishes"]:
         return True
     elif stats_old["first_wishes"] == stats_new["first_wishes"] and stats_old["second_wishes"] < stats_new["second_wishes"]:
         return True
-    elif stats_old["second_wishes"] == stats_new["second_wishes"] and stats_old["third_wishes"] < stats_new["third_wishes"]:
+    elif stats_old["first_wishes"] == stats_new["first_wishes"] and stats_old["second_wishes"] == stats_new["second_wishes"] and stats_old["third_wishes"] < stats_new["third_wishes"]:
         return True
     else:
         return False
@@ -57,18 +58,14 @@ def is_better(stats_old, stats_new):
 
 file_path = "wichteln4.txt"
 file = open(file_path, 'r', encoding='utf8')
-
 lines = file.readlines()
-
 class_members = int(lines[0])
-
 erste_wünsche = {}
 zweite_wünsche = {}
 dritte_wünsche = {}
 
 for pupil in range(class_members):  # Extract wishes from text file into lists
-    wishes = lines[pupil + 1]
-    wishes = wishes.split(" ")
+    wishes = lines[pupil + 1].split(" ")
     for i in range(len(wishes)):
         if i == 0 and wishes[i] == "":
             wishes.remove(wishes[i])
@@ -83,8 +80,9 @@ for pupil in range(class_members):  # Extract wishes from text file into lists
     erste_wünsche[pupil] = wishes[0]
     zweite_wünsche[pupil] = wishes[1]
     dritte_wünsche[pupil] = wishes[2]
-    print(erste_wünsche)
-    print(zweite_wünsche)
-    print(dritte_wünsche)
-print("Start:")
-print(geschenke_verteilen(erste_wünsche, zweite_wünsche, dritte_wünsche, class_members))
+solution = geschenke_verteilen(erste_wünsche, zweite_wünsche, dritte_wünsche, class_members)
+print("Erste Wünsche erfüllt: " + str(solution["first_wishes"]))
+print("Zweite Wünsche erfüllt: " + str(solution["second_wishes"]))
+print("Dritte Wünsche erfüllt: " + str(solution["third_wishes"]))
+print("Zufällig zugeordnete Geschenke: " + str(solution["no_wish"]))
+print("Dauer: " + str(datetime.now() - startTime))

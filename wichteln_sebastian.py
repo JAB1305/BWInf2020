@@ -1,3 +1,6 @@
+from datetime import datetime
+startTime = datetime.now()
+
 def main(item):
     wunsch1 = 0
     wunsch2 = 0
@@ -63,7 +66,8 @@ def überschreiben(wunsch1, wunsch2, wunsch3, zufall, zuordnung, item):
     return cacheW1, cacheW2, cacheW3, cacheZufall, cacheZuordnung, übrig
 
 
-eingabe = int(input("Welches Szenario soll simuliert werden? 1, 2, 3, 4, 5, 6 oder 7? "))
+# eingabe = int(input("Welches Szenario soll simuliert werden? 1, 2, 3, 4, 5, 6 oder 7? "))
+eingabe = 4
 if 1 <= eingabe <= 7:
     wichteln = "wichteln" + str(eingabe) + ".txt"
 datei = open(wichteln, 'r', encoding='utf8')
@@ -113,5 +117,5 @@ print("Anzahl 3. Wünsche: " + str(cacheW3))
 print("Anzahl zufällig zugeloster Gegenstände: " + str(cacheZufall))
 print("Zuordnung nach dem Muster 'Person --> Gegenstand': " + str(cacheZuordnung))
 print("Übrig gebiebene Gegenstände: " + str(übrig))
-
+print("Dauer: " + str(datetime.now() - startTime))
 datei.close()
