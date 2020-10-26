@@ -3,7 +3,6 @@ def solution_exists(puzzle):
     two_halves = []
     for entry in puzzle:
         if entry in two_halves:
-            print(entry)
             return False
         elif entry not in one_half_found:
             one_half_found.append(entry)
