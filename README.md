@@ -20,6 +20,13 @@ Dokumentation: <a href="www.google.de">Dokumentation</a>
 Quellcode: woerter_sortieren.py<br>
 Dokumentation: <a href="www.google.de">Dokumentation</a>
 
+## Aufgabe 3:
+### Turniersysteme vergleichen 
+> Schreibe ein Programm, das die Spielstärken der Spieler einliest und für jede dieser Turniervarianten ermittelt, wie oft der spielstärkste Spieler im Durchschnitt über viele Wiederholungen des Turniers gewinnt.
+
+Quellcode: tobis_turnier.py<br>
+Dokumentation: <a href="www.google.de">Dokumentation</a>
+
 ## Aufgabe 5:
 ### Geschenke auf eine Klasse verteilen, so das möglichst viele Wünsche erfüllt werden. 
 > Schreibe ein Programm, das solche Wünsche von Schülerinnen und Schülern einliest und eine möglichst gute Verteilung gemäß der obigen Definition ausgibt.
