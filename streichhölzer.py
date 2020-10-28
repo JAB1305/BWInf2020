@@ -10,6 +10,11 @@ file_after = open(file_path_after, 'r', encoding='utf8')
 lines = file.readlines()
 lines_after = file_after.readlines()
 matches = []
+matches_target = []
+matches_to_be_moved_left = []
+matches_to_be_moved_right = []
+match_colors = {}
+colors = [(220, 60, 30), (60, 220, 30), (30, 60, 220), (30, 200, 200), (220, 30, 220)]
 
 max_x = int(lines[0].split(",")[0]) + 1
 max_y = int(lines[0].split(",")[1]) + 1
@@ -19,15 +24,26 @@ pygame.init()
 pause = False
 
 
-def add_match(surface, color, coords):
+def add_match(surface, color, color_highlight, coords):
     start_coords = coords.replace("(", "").replace(")", "").split(",")
     x_start = float(start_coords[0])
     y_start = float(start_coords[1])
     x_end = float(start_coords[2])
     y_end = float(start_coords[3])
-    pygame.draw.line(surface, color, (50 + scale_x * x_start, 700 - scale_y * y_start),
-                     (50 + scale_x * x_end, 700 - scale_y * y_end), 5)
-    matches.append(str(x_start) + ", " + str(y_start) + ", " + str(x_end) + ", " + str(y_end))
+    match = (str(x_start) + ", " + str(y_start) + ", " + str(x_end) + ", " + str(y_end))
+    matches.append(match)
+    already_exists = False
+    for match_target in matches_target:
+        if match_target == (str(x_start) + ", " + str(y_start) + ", " + str(x_end) + ", " + str(y_end)):
+            already_exists = True
+    if already_exists:
+        pygame.draw.line(surface, color_highlight, (50 + scale_x * x_start, 700 - scale_y * y_start),
+                         (50 + scale_x * x_end, 700 - scale_y * y_end), 5)
+    else:
+        pygame.draw.line(surface, color, (50 + scale_x * x_start, 700 - scale_y * y_start),
+                         (50 + scale_x * x_end, 700 - scale_y * y_end), 5)
+        if not match in match_colors:
+            match_colors[match] = colors  # TODO: Each match that has to be moved, gets a color. Same color is used later
 
 
 def add_match_after(surface, color, color_highlight, coords):
@@ -42,10 +58,11 @@ def add_match_after(surface, color, color_highlight, coords):
             already_exists = True
     if already_exists:
         pygame.draw.line(surface, color_highlight, (50 + scale_x * x_start + 800, 700 - scale_y * y_start),
-                        (50 + scale_x * x_end + 800, 700 - scale_y * y_end), 5)
+                         (50 + scale_x * x_end + 800, 700 - scale_y * y_end), 5)
     else:
         pygame.draw.line(surface, color, (50 + scale_x * x_start + 800, 700 - scale_y * y_start),
                          (50 + scale_x * x_end + 800, 700 - scale_y * y_end), 5)
+    matches_target.append(str(x_start) + ", " + str(y_start) + ", " + str(x_end) + ", " + str(y_end))
 
 
 while not pause:
@@ -56,7 +73,7 @@ while not pause:
     WHITE = (255, 255, 255)
     GRAY = (203, 203, 203)
     GREEN = (0, 255, 0)
-    RED = (255, 0 ,0)
+    RED = (255, 0, 0)
     pygame.draw.line(DISPLAYSURF, WHITE, (50 + scale_x * 1, 700 - scale_y * 1), (50 + scale_x * 2, 700 - scale_y * 1),
                      5)
     pygame.display.set_caption('Streichholzrätsel')
@@ -78,10 +95,10 @@ while not pause:
         text = font.render(str((y - max_y) * -1), True, WHITE)
         DISPLAYSURF.blit(text, (30 + text.get_width() // 2, distance_to_top_border - text.get_height() // 2))
         DISPLAYSURF.blit(text, (30 + text.get_width() + 1600 // 2, distance_to_top_border - text.get_height() // 2))
-    for index in range(len(lines)-1):
+    for index in range(len(lines) - 1):
         index = index + 1
-        add_match(DISPLAYSURF, WHITE, lines[index])
-    for index in range(len(lines_after)-1):
+        add_match(DISPLAYSURF, WHITE, GREEN, lines[index])
+    for index in range(len(lines_after) - 1):
         index = index + 1
         add_match_after(DISPLAYSURF, GRAY, GREEN, lines_after[index])
     pygame.display.update()
