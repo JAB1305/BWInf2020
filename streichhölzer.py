@@ -1,11 +1,14 @@
 import pygame
 from datetime import datetime
 
-file_path = "streichhölzer/streichhölzer" + input(
-    "Welches Beispiel soll getestet werden? 1, 2, 3, 4, 5, 6 oder 7?") + ".txt"
+task_id = input("Welches Beispiel soll getestet werden? 1, 2, 3, 4, 5, 6 oder 7?")
+file_path_before = "streichhölzer/before" + task_id + ".txt"
+file_path_after = "streichhölzer/after" + task_id + ".txt"
 startTime = datetime.now()
-file = open(file_path, 'r', encoding='utf8')
+file = open(file_path_before, 'r', encoding='utf8')
+file_after = open(file_path_after, 'r', encoding='utf8')
 lines = file.readlines()
+lines_after = file_after.readlines()
 
 max_x = int(lines[0].split(",")[0]) + 1
 max_y = int(lines[0].split(",")[1]) + 1
@@ -21,7 +24,18 @@ def add_match(surface, color, coords):
     y_start = float(start_coords[1])
     x_end = float(start_coords[2])
     y_end = float(start_coords[3])
-    pygame.draw.line(surface, color, (50 + scale_x * x_start, 700 - scale_y * y_start), (50 + scale_x * x_end, 700 - scale_y * y_end), 5)
+    pygame.draw.line(surface, color, (50 + scale_x * x_start, 700 - scale_y * y_start),
+                     (50 + scale_x * x_end, 700 - scale_y * y_end), 5)
+
+
+def add_match_after(surface, color, coords):
+    start_coords = coords.replace("(", "").replace(")", "").split(",")
+    x_start = float(start_coords[0])
+    y_start = float(start_coords[1])
+    x_end = float(start_coords[2])
+    y_end = float(start_coords[3])
+    pygame.draw.line(surface, color, (50 + scale_x * x_start + 800, 700 - scale_y * y_start),
+                     (50 + scale_x * x_end + 800, 700 - scale_y * y_end), 5)
 
 
 while not pause:
@@ -30,6 +44,7 @@ while not pause:
             exit()
     DISPLAYSURF = pygame.display.set_mode((1600, 800))
     WHITE = (255, 255, 255)
+    GRAY = (203, 203, 203)
     pygame.draw.line(DISPLAYSURF, WHITE, (50 + scale_x * 1, 700 - scale_y * 1), (50 + scale_x * 2, 700 - scale_y * 1),
                      5)
     pygame.display.set_caption('Streichholzrätsel')
@@ -54,4 +69,7 @@ while not pause:
     for index in range(len(lines)-1):
         index = index + 1
         add_match(DISPLAYSURF, WHITE, lines[index])
+    for index in range(len(lines_after)-1):
+        index = index + 1
+        add_match_after(DISPLAYSURF, WHITE, lines_after[index])
     pygame.display.update()
