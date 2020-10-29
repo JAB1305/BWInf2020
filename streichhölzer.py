@@ -3,6 +3,7 @@ from datetime import datetime
 import random
 
 task_id = input("Welches Beispiel soll getestet werden? 1, 2, 3, 4, 5, 6 oder 7?")
+matches_to_move_count = input("Wie viele Streichhölzer sollen bewegt werden?")
 file_path_before = "streichhölzer/before" + task_id + ".txt"
 file_path_after = "streichhölzer/after" + task_id + ".txt"
 startTime = datetime.now()
@@ -13,7 +14,8 @@ lines_after = file_after.readlines()
 matches = []
 matches_after = []
 colors = [(150, 60, 30), (60, 220, 30), (30, 220, 220), (30, 200, 200), (20, 30, 220)]
-
+used_colors = []
+minimal_amount_to_move = 0
 max_x = int(lines[0].split(",")[0]) + 1
 max_y = int(lines[0].split(",")[1]) + 1
 scale_y = 700 / max_y
@@ -64,6 +66,7 @@ for index in range(len(lines_after) - 1):
     matches_after.append(Match(None, x_start, x_end, y_start, y_end, None, True))
 
 while not pause:
+    minimal_amount_to_move = 0
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             exit()
@@ -91,8 +94,6 @@ while not pause:
         text = font.render(str((y - max_y) * -1), True, WHITE)
         DISPLAYSURF.blit(text, (30 + text.get_width() // 2, distance_to_top_border - text.get_height() // 2))
         DISPLAYSURF.blit(text, (30 + text.get_width() + 1600 // 2, distance_to_top_border - text.get_height() // 2))
-    print(matches_after)
-    print(matches)
     for index in range(len(matches)):
         for index_after in range(len(matches_after)):
             if matches[index].x_start == matches_after[index_after].x_start:
@@ -104,10 +105,12 @@ while not pause:
         for index_after in range(len(matches_after)):
             if matches[index].color == (255, 255, 255) and matches_after[index_after].color == (255, 255, 255):
                 color_new = random.choice(colors)
-                colors.remove(color_new)
+                while color_new in used_colors:
+                    color_new = random.choice(colors)
+                used_colors.append(color_new)
                 matches[index].color = color_new
                 matches_after[index_after].color = color_new
-
+                minimal_amount_to_move = minimal_amount_to_move + 1
     for match_obj in matches:
         match_obj.surface = DISPLAYSURF
         match_obj.paint()
