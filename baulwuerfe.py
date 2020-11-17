@@ -1,21 +1,29 @@
 def check_for_pattern(x, y):
     y = y + 2
     if (y + 3) in range(len(lines)):  # Wenn y + 3 auch nicht über Maximum
-        ispattern1 = False
-        ispattern2 = False
+        ispattern_l0 = False
+        ispattern_l1 = False
+        ispattern_l2 = False
+        ispattern_l3 = False
         for y_add in range(4):
             if x + 2 in range(len(lines[y + y_add])):
                 if y_add == 0 or y_add == 3:
                     if lines[y + y_add][x] == "X":
                         if lines[y + y_add][x + 1] == "X":
                             if lines[y + y_add][x + 2] == "X":
-                                ispattern1 = True
+                                if y_add == 0:
+                                    ispattern_l0 = True
+                                elif y_add == 3:
+                                    ispattern_l3 = True
                 else:
                     if lines[y + y_add][x] == "X":
                         if lines[y + y_add][x + 1] == " ":
                             if lines[y + y_add][x + 2] == "X":
-                                ispattern2 = True
-        if ispattern1 and ispattern2:
+                                if y_add == 1:
+                                    ispattern_l1 = True
+                                elif y_add == 2:
+                                    ispattern_l2 = True
+        if ispattern_l0 and ispattern_l1 and ispattern_l2 and ispattern_l3:
             print(" Hügel gefunden [" + str(y) + "|" + str(x) + " - " + str(y + 3) + "|" + str(x + 2) + "]")
             return True
 
