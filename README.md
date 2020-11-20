@@ -27,6 +27,13 @@ Dokumentation: <a href="www.google.de">Dokumentation</a>
 Quellcode: tobis_turnier.py<br>
 Dokumentation: <a href="www.google.de">Dokumentation</a>
 
+## Aufgabe 4:
+### Streichholzrätsel lösen
+> Schreibe ein Programm, das zwei in deinem Format vorliegenden Streichholzanordnungen und eine Anzahl umzulegender Streichhölzer als Eingabe nimmt und berechnet, ob das Rätsel lösbar ist. Falls das Rätsel lösbar ist, soll ausgegeben werden, welche Streichhölzer wie umgelegt werden müssen. 
+
+Quellcode: tobis_turnier.py<br>
+Dokumentation: <a href="www.google.de">Dokumentation</a>
+
 ## Aufgabe 5:
 ### Geschenke auf eine Klasse verteilen, so das möglichst viele Wünsche erfüllt werden. 
 > Schreibe ein Programm, das solche Wünsche von Schülerinnen und Schülern einliest und eine möglichst gute Verteilung gemäß der obigen Definition ausgibt.
