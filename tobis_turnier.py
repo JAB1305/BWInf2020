@@ -105,13 +105,13 @@ start = datetime.now()
 average_ko = []
 average_ko_x5 = []
 average_league = []
-for test in range(1000):
+for test in range(150):
     average_ko.append(ko_system(players_count, lines, False))
     average_ko_x5.append(ko_system(players_count, lines, True))
     average_league.append(league_system(players_count, lines))
 print("Spielerzahl: " + str(players_count))
-print("Erwarteter Sieger anch Spielstärke: " + str(player_highest))
-print("Durschnittlicher Sieger des K.O.-Turniers: " + str(most_frequent(average_ko)))
-print("Durschnittlicher Sieger des K.O.-Turniers x5: " + str(most_frequent(average_ko_x5)))
-print("Durschnittlicher Sieger der Liga: " + str(most_frequent(average_league)))
+print("Erwarteter Sieger nach Spielstärke: " + str(player_highest + 1))
+print("Durschnittlicher Sieger des K.O.-Turniers: " + str(most_frequent(average_ko) + 1))
+print("Durschnittlicher Sieger des K.O.-Turniers x5: " + str(most_frequent(average_ko_x5) + 1))
+print("Durschnittlicher Sieger der Liga: " + str(most_frequent(average_league) + 1))
 print("Dauer: " + str(datetime.now() - start))
