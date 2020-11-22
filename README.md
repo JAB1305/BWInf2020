@@ -5,7 +5,7 @@ Meine Lösungen und Dokumentation für den Bundeswettbewerb Informatik 2020
 > Schreibe einen eigenen Passwort-Generator. Dein Programm soll zufällige und sinnlose Zeichenfolgen ausgeben, die schwer zu erraten, aber einigermaßen gut auszusprechen und deshalb leichter zu merken sind.
 
 Quellcode: passwortgenerator.py <br>
-Dokumentation: <a href="www.google.de">Dokumentation</a>
+Dokumentation: <a href="https://docs.google.com/document/d/1wQ-qFjwSwkQZmw6G6WjMZdaMUPAThwwoqxJ15NuwCF8/edit?usp=sharing">Dokumentation</a>
 ## Jugendaufgabe 2:
 ### Kartenauswertung um Bäue von Baulwürfen zu entdecken. 
 > Hilf dem Forschungsteam und schreibe ein Programm. Es soll die Hügelkarte einlesen und die Anzahl der Baulwurfsbaue ausgeben.
