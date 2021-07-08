@@ -5,7 +5,7 @@ Meine Lösungen und Dokumentation für den Bundeswettbewerb Informatik 2020
 > Schreibe einen eigenen Passwort-Generator. Dein Programm soll zufällige und sinnlose Zeichenfolgen ausgeben, die schwer zu erraten, aber einigermaßen gut auszusprechen und deshalb leichter zu merken sind.
 
 Quellcode: passwortgenerator.py <br>
-Dokumentation: <a href="www.google.de">Dokumentation</a>
+Dokumentation: <a href="https://docs.google.com/document/d/1wQ-qFjwSwkQZmw6G6WjMZdaMUPAThwwoqxJ15NuwCF8/edit?usp=sharing">Dokumentation</a>
 ## Jugendaufgabe 2:
 ### Kartenauswertung um Bäue von Baulwürfen zu entdecken. 
 > Hilf dem Forschungsteam und schreibe ein Programm. Es soll die Hügelkarte einlesen und die Anzahl der Baulwurfsbaue ausgeben.
@@ -23,6 +23,13 @@ Dokumentation: <a href="www.google.de">Dokumentation</a>
 ## Aufgabe 3:
 ### Turniersysteme vergleichen 
 > Schreibe ein Programm, das die Spielstärken der Spieler einliest und für jede dieser Turniervarianten ermittelt, wie oft der spielstärkste Spieler im Durchschnitt über viele Wiederholungen des Turniers gewinnt.
+
+Quellcode: tobis_turnier.py<br>
+Dokumentation: <a href="www.google.de">Dokumentation</a>
+
+## Aufgabe 4:
+### Streichholzrätsel lösen
+> Schreibe ein Programm, das zwei in deinem Format vorliegenden Streichholzanordnungen und eine Anzahl umzulegender Streichhölzer als Eingabe nimmt und berechnet, ob das Rätsel lösbar ist. Falls das Rätsel lösbar ist, soll ausgegeben werden, welche Streichhölzer wie umgelegt werden müssen. 
 
 Quellcode: tobis_turnier.py<br>
 Dokumentation: <a href="www.google.de">Dokumentation</a>
