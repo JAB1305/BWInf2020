@@ -47,6 +47,19 @@ class Match:
                              (50 + scale_x * self.x_end + 800, 700 - scale_y * self.y_end), 5)
 
 
+def possible(minimal_amount, requested_amount):
+    if requested_amount < requested_amount:
+        return False
+    elif requested_amount == minimal_amount:
+        return True
+    diff = requested_amount - minimal_amount
+    if (diff % 2) == 0:
+        return True
+    return False
+
+
+print(possible(3, 6))
+
 for index in range(len(lines) - 1):
     index = index + 1
     start_coords = lines[index].replace("(", "").replace(")", "").split(",")
@@ -72,7 +85,7 @@ while not pause:
             exit()
     DISPLAYSURF = pygame.display.set_mode((1600, 800))
     WHITE = (255, 255, 255)
-    GRAY = (203, 203, 203)
+    GRAY = (153, 153, 153)
     GREEN = (0, 255, 0)
     RED = (255, 0, 0)
     pygame.display.set_caption('Streichholzrätsel')
@@ -99,8 +112,8 @@ while not pause:
             if matches[index].x_start == matches_after[index_after].x_start:
                 if matches[index].y_start == matches_after[index_after].y_start and matches[index].x_end == \
                         matches_after[index_after].x_end and matches[index].y_end == matches_after[index_after].y_end:
-                    matches[index].color = RED
-                    matches_after[index_after].color = RED
+                    matches[index].color = GRAY
+                    matches_after[index_after].color = GRAY
     for index in range(len(matches)):
         for index_after in range(len(matches_after)):
             if matches[index].color == (255, 255, 255) and matches_after[index_after].color == (255, 255, 255):

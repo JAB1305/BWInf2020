@@ -1,0 +1,55 @@
+import math
+
+defaultDirection = 0  # Default direction; moving in this direction leads to +X
+decimal_count = 5
+position = [0, 0]  # Starting position
+enemy_goal_position = [0, 3]
+own_goal_position = [-8, 0]
+gridSize = 1  # Length of one side of the grid squares
+
+
+def calculate_new_position(direction, distance):
+    position[0] = position[0] + get_xz_offset(direction, distance)[0]
+    position[1] = position[1] + get_xz_offset(direction, distance)[1]
+
+
+def get_xz_offset(offset_angle, offset_distance):
+    if offset_angle <= 90:
+        x_value = offset_distance * math.sin(math.radians(offset_angle))
+        z_value = math.sqrt((offset_distance * offset_distance) - (x_value * x_value))
+        return [round(z_value / gridSize, decimal_count), round(x_value / gridSize, decimal_count)]
+    elif offset_angle >= 270:
+        offset_angle = offset_angle - 270
+        x_value = (offset_distance * math.sin(math.radians(offset_angle)))
+        z_value = -(math.sqrt((offset_distance * offset_distance) - (x_value * x_value)))
+        return [round(x_value / gridSize, decimal_count), round(z_value / gridSize, decimal_count)]
+    elif offset_angle >= 180:
+        offset_angle = offset_angle - 180
+        x_value = -(offset_distance * math.sin(math.radians(offset_angle)))
+        z_value = -(math.sqrt((offset_distance * offset_distance) - (x_value * x_value)))
+        return [round(z_value / gridSize, decimal_count), round(x_value / gridSize, decimal_count)]
+    elif offset_angle > 90:
+        offset_angle = offset_angle - 90
+        x_value = -(offset_distance * math.sin(math.radians(offset_angle)))
+        z_value = math.sqrt((offset_distance * offset_distance) - (x_value * x_value))
+        return [round(x_value / gridSize, decimal_count), round(z_value / gridSize, decimal_count)]
+
+
+def calculate_shot_angle(x_distance, z_distance):
+    print(z_distance)
+    if z_distance == 0:
+        return 0
+    if z_distance < 0:
+        return 360 - math.atan(x_distance / z_distance) * (180 / math.pi)
+    if z_distance > 0:
+        return 270 + math.atan(x_distance / z_distance) * (180 / math.pi)
+
+
+if __name__ == '__main__':
+    while True:
+        print("Momentane Position:" + str(position))
+        print("Winkel zum Torschuss (Gegner):"
+              + str(calculate_shot_angle(own_goal_position[0] - position[0], own_goal_position[1] - position[1])))
+        input_angle = float(input("Winkel:"))
+        input_distance = float(input("Distanz:"))
+        calculate_new_position(input_angle, input_distance)

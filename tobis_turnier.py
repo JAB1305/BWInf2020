@@ -32,7 +32,7 @@ def runde_ko_system(players, strengths):  # returns winners
             winners.append(win)
         return winners
     else:
-        print("An error occured! One of the rounds ended up in a odd count of players")
+        print("An error occured! One of the rounds ended up in an odd count of players")
         return None
 
 
@@ -90,6 +90,9 @@ def league_system(players_count, strengths):
             winner_player, wins_highest = player, wins[player]
     return winner_player
 
+
+List = [2, 1, 2, 2, 1, 3]
+print(most_frequent(List))
 
 file_path = "tobis_turnier/spielstaerken" + input("Welches Beispiel soll getestet werden? 1, 2, 3 oder 4?") + ".txt"
 file = open(file_path, 'r', encoding='utf8')
